@@ -1,0 +1,25 @@
+{% extends 'WelcomeSeller.html' %}
+
+{% block 'product' %}
+
+<div class="row">
+	<h2>Add Product</h2>
+	<form method="post" enctype="multipart/form-data">
+		{% csrf_token %}
+		Enter Product Name: <input type="text" name="name"><br>
+		Enter Description: <input type="text" name="desc"><br>
+		Enter Price: <input type="text" name="price"><br>
+		Enter Qty: <input type="number" name="qty"><br>
+		Image: <input type="file" name="img"><br>
+
+		Select Category: 
+		<select name="cat">
+			{% for i in data %}
+			<option value="{{i.id}}">{{i.catname}}</option>
+			{% endfor %}
+		</select>
+		<input type="submit" name="">
+	</form>
+</div>
+
+{% endblock %}

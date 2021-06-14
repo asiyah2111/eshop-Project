@@ -1,0 +1,102 @@
+{% extends 'index.html' %}
+{% block 'nav' %}
+{% if messages %}
+{% for i in messages %}
+<script type="text/javascript">alert('{{i}}')</script>
+{% endfor %}
+{% endif %}
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">eShop: {{request.user}}</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/buyer/home/">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/buyer/cartdetails/">Cart<sup>{{ cnt }}</sup></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout/">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+{% endblock %} 
+{%block 'category' %}
+	<div class="col-lg-3">
+    <h3>username:-{{request.user}}</h3>
+    <p align="center">Name:-{{user.user.first_name}} {{user.user.last_name}}<br><br>Email:- {{user.user.email}}</p>
+
+      </div>
+{%endblock%}
+
+{%block 'product'%}
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Address</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" class="form ">
+      {% csrf_token %}
+      <input type="text" name="add1" placeholder="Address 1" class="form-control"><br/>
+      <input class="form-control" type="text" name="add2" placeholder="Address 2"><br/>
+      <input type="number" name="pin" class="form-control" placeholder="pincode"><br/>
+      <input type="text" name="city" placeholder="city" class="form-control"><br/>
+      <input class="form-control" type="text" name="lm" placeholder="landmark"><br/>
+      <input type="text" class="form-control" name="state" placeholder="state"><br/>
+      <input class="form-control" type="text" name="mobile" placeholder="mobile"><br/>
+      <div class="modal-footer">
+      <input type="submit" name="" class="btn btn-primary" value="Add Address"  >
+
+
+      
+      
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+  Add Address
+</button>
+<table class="table">
+<tr>
+  <th>address Link1</th>
+  <th>address Link2</th>
+  <th>city</th>
+  <th>mobile n.</th>
+</tr>  
+{% for i in add%}
+<tr>
+  <td>{{i.addline1}}</td>
+  <td>{{i.addline2}}</td>
+  <td>{{i.city}}</td>
+  <td>{{i.mobile_n}}</td>
+</tr>
+{%endfor%}
+</table>
+
+    
+        </div>
+
+{%endblock%}
